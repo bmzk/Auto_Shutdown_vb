@@ -28,7 +28,7 @@
                 T.开始时刻 = Date.Now
             End If
             slider模式选择.IsEnabled = False
-
+            BT0.Foreground = Brushes.Red
             BT1.IsEnabled = False
             BT2.IsEnabled = False
             BT3.IsEnabled = False
@@ -44,6 +44,7 @@
             BT0.Content = "开始"
 
             slider模式选择.IsEnabled = True
+            BT0.Foreground = Brushes.Black
             BT1.IsEnabled = True
             BT2.IsEnabled = True
             BT3.IsEnabled = True
@@ -58,7 +59,7 @@
         label状态栏.Content = "本地时间：" & DateTime.Now.ToLongDateString() & “ ” & DateTime.Now.ToLongTimeString()
         Me.PB秒.Value = T.剩余时间.S
         PB分.Value = T.剩余时间.M
-        Me.Title = T.Is倒计时模式
+        'Me.Title = T.Is倒计时模式
 
     End Sub
     Sub 定时器事件（）
@@ -67,6 +68,7 @@
             If T.剩余时间.t <= 0 Then
                 '关机
                 System.Diagnostics.Process.Start("shutdown", "/s /t 0")
+                定时器.Stop()
                 ' MsgBox("gua ji")
             End If
         Else
@@ -104,7 +106,7 @@
     End Sub
 
     Private Sub window_Loaded(sender As Object, e As RoutedEventArgs) Handles window.Loaded
-        定时器.Interval = New TimeSpan(0, 0, 0, 0, 200)
+        定时器.Interval = New TimeSpan(0, 0, 0, 0, 100)
         AddHandler 定时器.Tick, AddressOf 定时器事件 ' 定时器.SynchronizingObject.Invoke(New Action(Of 委托类）（AddressOf 刷新）)
         T.Is倒计时模式 = True
         T.Is程序开始 = False
