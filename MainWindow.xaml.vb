@@ -22,6 +22,10 @@
     End Sub
     Private Sub BT0_Click(sender As Object, e As RoutedEventArgs) Handles BT0.Click
         If BT0.Content = "开始" Then
+            If T.剩余时间.t < 5 Then
+                MsgBox("关机时间在5秒之内，请设置更长时间！")
+                GoTo Mark_1
+            End If
             BT0.Content = "停止"
             T.Is程序开始 = True
             If T.Is倒计时模式 Then
@@ -35,6 +39,7 @@
             BT4.IsEnabled = False
             BT5.IsEnabled = False
             BT6.IsEnabled = False
+Mark_1:
         Else
             T.剩余时间 = T.剩余时间
             If T.剩余时间.t < 0 Then
